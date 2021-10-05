@@ -7,6 +7,11 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    text-align: center;
+    background-image: url('/img/background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
 }
 
 .main-content {
@@ -21,8 +26,9 @@ footer {
 }
 
 header {
-    margin-top: 16px;
+    margin-top: 2px;
     margin-bottom: 48px;
+    color: darkgreen;
 }
 
 h1 {
@@ -51,4 +57,5 @@ button {
     background: #888888;
     color: white;
     padding: 8px;
+    margin-top: 10px;
 }

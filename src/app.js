@@ -4,6 +4,7 @@ const hbs = require('hbs')
 
 const forecast = require('./utils/forecast')
 const geoCode = require('./utils/geoCode')
+const geoCodeReverse = require('./utils/geoCodeReverse')
 
 
 const app = express()
@@ -43,6 +44,39 @@ app.get('/help', (req, res) => {
         name: 'Shivam',
         helpText: 'This is a help text'
     })
+})
+
+app.get('/weather-current', (req, res) => {
+    console.log(req)
+    if (!req.query.latitude || !req.query.longitude) {
+        return res.send({
+            error: 'Latitude or Longitude missing'
+        })
+    }
+
+    geoCodeReverse(req.query.latitude, req.query.longitude, (error, address) => {
+        if (error) {
+            return res.send({
+                error
+            })
+        }
+        console.log('Address: ', address)
+
+        forecast(req.query.latitude, req.query.longitude, (error, forecastData) => {
+            if (error) {
+                return res.send({
+                    error
+                })
+            }
+
+            res.send({
+                forecast: forecastData,
+                location: address.address
+            })
+        })
+
+    })
+
 })
 
 app.get('/weather', (req, res) => {

@@ -45,8 +45,11 @@ currentLocation.addEventListener('submit', (e) => {
 
             url = '/weather-current?latitude=' + latitude + '&longitude=' + longitude
 
+            // Fetching response from the weather-current url
             fetch(url).then((response) => {
+                // converting the response to JSON
                 response.json().then((data) => {
+                    // Using the response value to get required information
                     if (data.error) {
                         messageOne.textContent = data.error
                     } else {
@@ -62,6 +65,8 @@ currentLocation.addEventListener('submit', (e) => {
         const error = (position) => {
             console.log(position)
         }
+
+        // Getting the current Location with success and error options
         const watchId = navigator.geolocation.getCurrentPosition(success, error)
 
 
